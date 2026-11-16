@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="th">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Welcome to BIMO World 💜</title>
+    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="premium.css">
+</head>
+
+<body>
+    <div class="login-page">
+        <section class="login-art">
+            <div class="login-float">💌 มีเพื่อนรออยู่ตรงนี้!</div><span class="eyebrow">✦ A LITTLE WORLD OF LOVE</span>
+            <div style="margin:30px 0 5px">
+                <div id="loginBot"> </div>
+            </div>
+            <div class="bubble" id="loginSpeech">หวัดดี! เราชื่อ BIMO 💜</div>
+            <h1>Hi, I'm BIMO!</h1>
+            <p>เพื่อนตัวน้อยที่ชอบคุย ชอบเล่น ชอบกอด และพร้อมช่วยให้ทุกวันของคุณง่ายขึ้น</p><span class="pill"
+                style="margin-top:20px;background:#fff9">✦ Your Little AI Buddy</span>
+        </section>
+        <section class="login-panel">
+            <div class="login-form"><span class="eyebrow">WELCOME BACK ✦</span>
+                <h2>กลับมาแล้วเหรอ! 🌷</h2>
+                <p class="sub">น้องกำลังรอเจออยู่เลย เข้าสู่ระบบเพื่อกลับไปหา BIMO กันนะ</p>
+                <form id="loginForm">
+                    <div class="formgroup"><label class="label" for="email">อีเมลของคุณ</label><input class="field"
+                            id="email" type="email" placeholder="you@example.com" autocomplete="email" required></div>
+                    <div class="formgroup"><label class="label" for="password">รหัสผ่าน</label>
+                        <div class="password-wrap"><input class="field" id="password" type="password"
+                                placeholder="••••••••" autocomplete="current-password" required><button type="button"
+                                class="password-toggle" id="togglePassword" aria-label="แสดงรหัสผ่าน"><svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z"/><circle cx="12" cy="12" r="3"/></svg></button></div>
+                    </div><button class="btn" style="width:100%;padding:15px" id="loginBtn">เข้าสู่โลกของ BIMO
+                        ✨</button>
+                    <p class="auth-error" id="authError" role="alert"></p>
+                </form>
+                <div class="info-bar tiny" style="margin-top:20px">🔒 เข้าสู่ระบบผ่าน Supabase Auth ของโปรเจกต์เดิม •
+                    บัญชีผู้ใช้ต้องมีอยู่ในระบบก่อน</div>
+            </div>
+        </section>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script src="shared.js"></script>
+    <script>
+        document.getElementById('loginBot').innerHTML = bimoMarkup(); const pw = document.getElementById('password'); pw.addEventListener('focus', () => mood('sleepy', 0)); pw.addEventListener('blur', () => mood('normal', 0)); document.getElementById('togglePassword').onclick = () => { pw.type = pw.type === 'password' ? 'text' : 'password'; document.getElementById('togglePassword').setAttribute('aria-label', pw.type === 'password' ? 'แสดงรหัสผ่าน' : 'ซ่อนรหัสผ่าน') }; document.getElementById('loginForm').onsubmit = async e => { e.preventDefault(); const btn = document.getElementById('loginBtn'), err = document.getElementById('authError'); btn.disabled = true; btn.textContent = 'BIMO กำลังเปิดประตู... 💜'; err.textContent = ''; try { if (!client) throw Error('โหลดระบบบัญชีไม่ได้ กรุณาตรวจสอบอินเทอร์เน็ต'); const { error } = await client.auth.signInWithPassword({ email: document.getElementById('email').value.trim(), password: pw.value }); if (error) throw error; mood('excited', 0); document.getElementById('loginSpeech').textContent = 'เย้! กลับมาแล้ว 💗'; setTimeout(() => location.replace('BIMOBOT.html'), 650) } catch (e) { err.textContent = e.message === 'Invalid login credentials' ? 'อีเมลหรือรหัสผ่านไม่ถูกต้อง ลองอีกครั้งนะ' : e.message; mood('hurt', 1500) } finally { btn.disabled = false; btn.textContent = 'เข้าสู่โลกของ BIMO ✨' } }; (async () => { try { if ((await client?.auth.getUser())?.data?.user) location.replace('BIMOBOT.html') } catch { } })();
+    </script>
+</body>
+
+</html>

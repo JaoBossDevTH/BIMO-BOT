@@ -1,0 +1,232 @@
+.bimo-game-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    gap: 22px;
+    align-items: start
+}
+
+.puzzle-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px
+}
+
+.game-toolbar,
+.game-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    width: 100%
+}
+
+.game-toolbar select,
+.game-btn {
+    background: #f4efff;
+    border: 1px solid #e2daf8;
+    color: #6454a0;
+    border-radius: 13px;
+    padding: 10px 13px;
+    font-weight: 600
+}
+
+.game-btn:hover,
+.game-btn.on {
+    background: #e6dbff;
+    border-color: #b3a0ef
+}
+
+.color-board {
+    --n: 4;
+    display: grid;
+    grid-template-columns: repeat(var(--n), minmax(0, 1fr));
+    width: min(100%, 490px);
+    aspect-ratio: 1;
+    box-shadow: 0 8px 32px #8674c021;
+    border-radius: 9px;
+    overflow: hidden;
+    background: #fff
+}
+
+.color-cell {
+    border: 1px solid #d7cfe9;
+    position: relative;
+    background: var(--tile, #fbfaff);
+    padding: 0;
+    min-width: 0;
+    aspect-ratio: 1;
+    transition: background .13s, transform .13s
+}
+
+.color-cell:not(.given):hover {
+    filter: brightness(.97);
+    z-index: 1
+}
+
+.color-cell:focus-visible {
+    outline: 3px solid #7256d3;
+    outline-offset: -5px;
+    z-index: 2
+}
+
+.color-cell.given {
+    box-shadow: inset 0 0 0 3px #ffffff7d;
+    cursor: default
+}
+
+.color-cell.incorrect:after {
+    content: '!';
+    font-weight: 900;
+    color: #9b284b;
+    position: absolute;
+    top: 1px;
+    right: 6px
+}
+
+.given-dot {
+    position: absolute;
+    left: 5px;
+    top: 0;
+    color: #493d66;
+    font-size: 13px
+}
+
+.color-notes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 3px;
+    padding: 5px
+}
+
+.color-notes i {
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid #ffffffb8
+}
+
+.color-palette {
+    display: flex;
+    gap: 9px;
+    justify-content: center;
+    flex-wrap: wrap
+}
+
+.palette-dot {
+    height: 42px;
+    width: 42px;
+    border: 3px solid white;
+    box-shadow: 0 0 0 1px #ddd5f0;
+    border-radius: 14px;
+    color: #45365d;
+    font-size: 22px;
+    font-weight: 900
+}
+
+.palette-dot.chosen {
+    box-shadow: 0 0 0 3px #7e68d7;
+    transform: translateY(-3px)
+}
+
+.game-feedback {
+    color: #7e6caa;
+    text-align: center;
+    min-height: 24px
+}
+
+.game-sidebar {
+    display: grid;
+    gap: 18px
+}
+
+.game-buddy {
+    text-align: center;
+    background: linear-gradient(145deg, #fff, #f4eeff)
+}
+
+.game-buddy-robot {
+    height: 165px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden
+}
+
+.game-buddy-robot .bimo {
+    transform: scale(.65);
+    flex-shrink: 0
+}
+
+.game-buddy h2 {
+    font-size: 18px;
+    margin: 10px 0
+}
+
+.game-buddy p {
+    color: #8879ad;
+    line-height: 1.7
+}
+
+@media(max-width:980px) {
+    .bimo-game-layout {
+        grid-template-columns: 1fr
+    }
+
+    .game-sidebar {
+        grid-template-columns: repeat(2, minmax(0, 1fr))
+    }
+
+    .game-sidebar>.card:last-child {
+        grid-column: 1/-1
+    }
+}
+
+@media(max-width:620px) {
+    .game-sidebar {
+        grid-template-columns: 1fr
+    }
+
+    .game-sidebar>.card:last-child {
+        grid-column: auto
+    }
+
+    .puzzle-card {
+        padding: 15px
+    }
+
+    .palette-dot {
+        height: 36px;
+        width: 36px
+    }
+
+    .game-actions {
+        gap: 6px
+    }
+
+    .game-btn {
+        padding: 9px 10px;
+        font-size: 12px
+    }
+
+    .color-notes i {
+        width: 7px;
+        height: 7px
+    }
+}
+.queens-board{width:min(100%,520px);border:4px solid #6956a4;border-radius:18px;overflow:hidden;box-shadow:0 16px 36px #7360ac2f,0 5px 0 #b1a1d5;background:#6e5b9c;gap:0;aspect-ratio:1}
+.queen-cell{min-width:0;aspect-ratio:1;position:relative;display:flex;align-items:center;justify-content:center;background:linear-gradient(145deg,#ffffff52,transparent 55%),var(--tile);border-style:solid;border-color:#ffffffa8;cursor:pointer;box-shadow:inset 2px 2px 5px #ffffff7c,inset -2px -3px 5px #6655891c;transition:filter .14s,transform .14s}
+.queen-cell:active{filter:brightness(1.08);transform:scale(.94)}
+.queen-cell:focus-visible{outline:3px solid #483487;outline-offset:-5px;z-index:2}
+.queen-icon{font-size:clamp(18px,4vw,36px);filter:drop-shadow(0 3px 2px #54407180)}
+.cross{font-size:clamp(20px,4vw,36px);font-weight:700;color:#fff;text-shadow:0 2px 5px #59487780}
+.game-stats{display:flex;justify-content:space-between;align-items:center;gap:12px;width:100%;color:#7561b3}
+.game-stats strong{font-size:23px;color:#e96d99;letter-spacing:3px}
+.rules{line-height:2.1;margin-top:12px}
+#next[hidden]{display:none}
+.puzzle-card{background:linear-gradient(160deg,#fff,#faf4ff 65%,#f7edff)}
+@media(max-width:620px){.queen-icon{font-size:clamp(17px,5vw,28px)}.queens-board{border-width:3px}.game-stats{font-size:12px}}
